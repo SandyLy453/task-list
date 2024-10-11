@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 
 export default function Task({ name, checked, removeTask, toggleTaskStatus }) {
-  useEffect(() => {}, [checked]);
+  useEffect(() => {
+    // No need for direct DOM manipulation via refs. React will handle it.
+  }, [checked]);
 
   return (
     <>
