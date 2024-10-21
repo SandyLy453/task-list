@@ -4,42 +4,48 @@ import TaskForm from './components/TaskForm';
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 0, name: "Task 1", completed: false },
-    { id: 1, name: "Task 2", completed: false },
-    { id: 2, name: "Task 3", completed: false }
+    { name: 'Task 1', checked: false },
+    { name: 'Task 2', checked: false },
+    { name: 'Task 3', checked: false }
   ]);
 
-  const addTask = (task) => {
-    setTasks([...tasks, { id: tasks.length, name: task, completed: false }]); // Adds task incomplete by default
+  // Function to calculate the number of unchecked tasks
+  const getUncheckedCount = () => {
+    return tasks.filter((task) => !task.checked).length;
   };
 
-  const toggleComplete = (taskId) => {
-    setTasks(tasks.map(task => 
-      task.id === taskId ? { ...task, completed: !task.completed } : task
-    ));
+  // Function to add a new task
+  const addTask = (taskName) => {
+    setTasks([...tasks, { name: taskName, checked: false }]); // New tasks are unchecked by default
   };
 
-  const removeTask = (taskId) => {
-    setTasks(tasks.filter(task => task.id !== taskId));
+  // Function to remove a task
+  const removeTask = (taskName) => {
+    setTasks(tasks.filter((task) => task.name !== taskName));
   };
 
-  const remainingTask = tasks.filter(task => !task.completed).length;
+  // Function to toggle the task status
+  const toggleTaskStatus = (taskName) => {
+    const updatedTasks = tasks.map((task) =>
+      task.name === taskName ? { ...task, checked: !task.checked } : task
+    );
+    setTasks(updatedTasks); // Update the task's checked status in the parent state
+  };
 
   return (
     <>
-      <div className="main">
-        <h1 className="header">Daily Planner</h1>
+      <div className="container">
+        <h1 className="title">Task List</h1>
+        <TaskForm addTask={addTask} />
+        <p className="note">You have {getUncheckedCount()} left.</p>
         <div>
-          <TaskForm addTask={addTask} />
-          <h2 className="counting">
-            You have {remainingTask} task{remainingTask !== 1 ? 's' : ''} remaining
-          </h2>
-          {tasks.map((task) => (
-            <Task 
-              key={task.id} 
-              task={task}
-              toggleComplete={() => toggleComplete(task.id)} 
-              removeTask={() => removeTask(task.id)}
+          {tasks.map((task, index) => (
+            <Task
+              key={index}
+              name={task.name}
+              checked={task.checked}
+              toggleTaskStatus={toggleTaskStatus}
+              removeTask={removeTask}
             />
           ))}
         </div>
