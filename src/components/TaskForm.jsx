@@ -1,39 +1,28 @@
 import { useState } from "react";
 
-// const taskTemplate = {
-//     name: 'new task'
-// };
+export default function TaskForm({ addTask }) {
+  const [inputValue, setInputValue] = useState("");
 
-export default function TaskForm({addTask}) {
-    const [taskName, setTaskName] = useState('');
-
-    // form submission
-    const handleSubmit = (e) => {
-        e.preventDefault(); // the form submission will be handled by JavaScript instead of triggering a page refresh
-        if (taskName.trim()) { // checks if the taskName (the text the user entered) is not an empty string after trimming whitespace
-            addTask( taskName ); 
-            setTaskName(''); // clear the input field
-        }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (inputValue.trim() !== "") {
+      addTask(inputValue);
+      setInputValue("");
     }
+  };
 
-    return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div className="formContainer">
-                    <input
-                        id="task-name"
-                        type="text"
-                        value={taskName}
-                        onChange={(e) => setTaskName(e.target.value)}
-                        placeholder="Enter a new task"
-                    />
-                    <div className="btn-group">
-                        <button type="submit" className="btn-save">Save</button>
-                    </div>
-                </div>
-            </form>
-        </>
-    )
+  return (
+    <form onSubmit={handleSubmit} className="inputBox">
+      <input
+        type="text"
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Enter task name"
+        className="input"
+      />
+      <button type="submit" className="sm-btn">Add Task</button>
+    </form>
+  );
 }
 
 
