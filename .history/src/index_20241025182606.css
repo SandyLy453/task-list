@@ -36,7 +36,6 @@
   display: flex;
   flex-direction: row;
   gap: 10px;
-  margin-bottom: 20px;
 }
 
 .filter-btn {
@@ -47,12 +46,7 @@
   border-radius: 10px;
   cursor: pointer;
   font-family: monospace;
-  font-size: 16px;
-}
-
-.filter-btn:hover {
-  background-color: rgb(108, 135, 108);
-  color: azure;
+  font-size: 20px;
 }
 
 .sm-btn{

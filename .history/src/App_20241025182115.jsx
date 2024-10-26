@@ -48,22 +48,12 @@ function App() {
         <div className="filter">
           <button 
             onClick={() => setFilter('all')}
-            className="filter-btn"
+            className="filter"
           >
             All
           </button>
-          <button 
-            onClick={() => setFilter('pending')}
-            className="filter-btn"
-          >
-            Pending
-          </button>
-          <button 
-            onClick={() => setFilter('completed')}
-            className="filter-btn"
-          >
-            Completed
-          </button>
+          <button onClick={() => setFilter('pending')}>Pending</button>
+          <button onClick={() => setFilter('completed')}>Completed</button>
         </div>
         <div>
           {filteredTasks.map((task) => (

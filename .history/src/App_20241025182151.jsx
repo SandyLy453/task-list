@@ -48,19 +48,19 @@ function App() {
         <div className="filter">
           <button 
             onClick={() => setFilter('all')}
-            className="filter-btn"
+            className="filter"
           >
             All
           </button>
           <button 
             onClick={() => setFilter('pending')}
-            className="filter-btn"
+            className="filter"
           >
             Pending
           </button>
           <button 
             onClick={() => setFilter('completed')}
-            className="filter-btn"
+            className="filter"
           >
             Completed
           </button>
